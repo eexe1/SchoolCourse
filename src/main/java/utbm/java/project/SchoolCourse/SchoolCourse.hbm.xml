@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="utbm.java.project.SchoolCourse">
+
+    <class name="Client" table="CLIENT">
+ 		<id name="id" column="ID">
+            <generator class="native"/>
+        </id>
+        <property name="firstname" column="FIRSTNAME" />
+        <property name="lastname" column="LASTNAME"/>
+        <property name="cellphone" column="PHONE"/>
+        <property name="address" column="ADDRESS" />
+        <property name="email" column="EMAIL"/>
+        <property name="sessionID" column="SESSION_ID"/>
+	</class>
+	
+	<class name="Course" table="COURSE">
+	    <id name="code" column="CODE"/>
+        <property name="title" column="TITLE"/>
+	</class>
+	
+	<class name="CourseSession" table="COURSE_SESSION">
+	    <id name="id" column="ID"/>
+        <property name="start" column="START" />
+        <property name="end" column="END"/>
+        <property name="course_code" column="COURSE_CODE"/>
+        <property name="location_id" column="LOCATION_ID" />
+	</class>
+	
+
+</hibernate-mapping>
