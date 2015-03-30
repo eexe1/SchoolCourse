@@ -29,6 +29,9 @@
         <property name="course_code" column="COURSE_CODE"/>
         <property name="location_id" column="LOCATION_ID" />
 	</class>
-	
+	<class name="Location" table="LOCATION">
+	    <id name="id" column="ID"/>
+        <property name="city" column="CITY"/>
+	</class>
 
 </hibernate-mapping>

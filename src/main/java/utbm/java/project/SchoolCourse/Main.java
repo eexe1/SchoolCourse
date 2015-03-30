@@ -11,8 +11,6 @@ public class Main {
 	private static Scanner scan;
 	
 	public static void main(String[] args) {
-
-
 		System.out.println("--------- OPTIONS ---------");
 		System.out.println("----1.List Classes-------------");
 		System.out.println("----2.Search Classes By Name---");
@@ -22,7 +20,6 @@ public class Main {
 		String input;
 		int sessionID;
 		switch(option){
-		
 		case 1:	
 			List<Course> courses1 = courseListAll();
 			for(Course course:courses1){
@@ -165,7 +162,6 @@ public class Main {
 		session.close();
 
 		System.out.println("-- Inscription Completed ---");
-		
 		
 	}
 }
