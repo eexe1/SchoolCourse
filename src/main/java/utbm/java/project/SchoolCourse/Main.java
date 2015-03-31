@@ -1,8 +1,10 @@
 package utbm.java.project.SchoolCourse;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -42,9 +44,29 @@ public class Main {
 			sessionID = searchIndex(input);
 			inscript(sessionID);
 			break;
+		case 3:
+			List<Course> courses3 = getCourseList(1);
+			for(Course course:courses3){
+				System.out.println(course.getCode()+" : "+course.getTitle());
+			}
+			break;
 		}
 		scan.close();
 	}
+	public static List<Course> getCourseList(int locationID){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		@SuppressWarnings("unchecked")
+		List<CourseSession> courseSession = session.createQuery("from CourseSession where location_id like :searchKey").setParameter("searchKey", locationID).list();
+		List<Course> courses = new ArrayList<Course>();
+		for(CourseSession cs:courseSession){
+			courses.add(cs.getCourse());
+			System.out.println(cs.getCourse().getTitle());
+		}
+		session.close();
+		return courses;
+	}
+	
 	
 	private static  List<Client> clientList() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();

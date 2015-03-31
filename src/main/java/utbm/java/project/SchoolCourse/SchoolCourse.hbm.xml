@@ -22,12 +22,14 @@
         <property name="title" column="TITLE"/>
 	</class>
 	
-	<class name="CourseSession" table="COURSE_SESSION">
+	<class name="CourseSession" table="COURSE_SESSION" >
 	    <id name="id" column="ID"/>
         <property name="start" column="START" />
         <property name="end" column="END"/>
-        <property name="course_code" column="COURSE_CODE"/>
         <property name="location_id" column="LOCATION_ID" />
+        <many-to-one name="course" class="Course" lazy="false">
+            <column name="COURSE_CODE" not-null="true" />
+        </many-to-one>
 	</class>
 	<class name="Location" table="LOCATION">
 	    <id name="id" column="ID"/>

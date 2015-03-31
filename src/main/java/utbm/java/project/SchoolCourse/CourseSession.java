@@ -13,7 +13,18 @@ public class CourseSession {
 	private String course_code;
 	
 	private int location_id;
+
+	private Course course;
 	
+	
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+
 	public CourseSession() {
 		
 	}
@@ -66,6 +77,4 @@ public class CourseSession {
 	public void setLocation_id(int location_id) {
 		this.location_id = location_id;
 	}
-
-	
 }

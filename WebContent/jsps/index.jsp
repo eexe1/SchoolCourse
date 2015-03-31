@@ -1,6 +1,8 @@
 <%@page import="java.util.Date"%>
 <%@page import="utbm.java.project.SchoolCourse.Main"%>
 <%@page import="utbm.java.project.SchoolCourse.Course"%>
+<%@page import="utbm.java.project.SchoolCourse.CourseSession"%>
+<%@page import="utbm.java.project.SchoolCourse.Location"%>
 <%@page import="utbm.java.project.SchoolCourse.SettingPage"%>
 <%@page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -102,11 +104,26 @@
 						</div>
 						<div class="row">
 							<div class="12u">
+								<select name="location" id="location" onchange="changeList(this)">
+									<option value="0">Choose a location</option>
+									<% SettingPage setPage = new SettingPage();
+									List<Location> locationList = setPage.getLocationList();
+									for (int i = 0; i < locationList.size(); i++) {
+										Location location = locationList.get(i);
+									%>
+									<option value=<%=location.getid()%>><%=location.getcity()%></option>
+									<%
+									}
+									%>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="12u">
 								<select name="course" id="course">
 									<option value="">Choose a course</option>
 									<%
-										SettingPage setPage = new SettingPage();
-										List<Course> courseList = setPage.gettingCourseList();
+										List<Course> courseList = setPage.getCourseList();
 										for (int i = 0; i < courseList.size(); i++) {
 											Course course = courseList.get(i);
 									%>
@@ -117,6 +134,43 @@
 								</select>
 							</div>
 						</div>
+						<script>
+							
+							var output;
+							var size;
+
+							function changeList( box ) {
+								switch (box.options[box.selectedIndex].value){
+								case "1" : 
+									<%List<Course> courseList2 = setPage.getCourseListByID(1);%>
+									size = <%=courseList2.size()%>;
+									output = [<% for (int i = 0; i < courseList2.size(); i++) {%>"<%= courseList2.get(i).getTitle() %>"<%= i + 1 < courseList2.size() ? ",":"" %><%}%>];
+									break;
+								case "2" :
+									<%List<Course> courseList3 = setPage.getCourseListByID(2);%>
+									size = <%=courseList3.size()%>;
+									output = [<% for (int i = 0; i < courseList3.size(); i++) {%>"<%= courseList3.get(i).getTitle() %>"<%= i + 1 < courseList3.size() ? ",":"" %><%}%>];
+									break;
+								case "0" :
+									size = 0;
+									output = null;
+									break;
+								}
+								emptyList( box.form.course );
+								fillList( box.form.course);
+							}
+							function emptyList( box ) {
+								while ( box.options.length ) box.options[0] = null;
+							}
+							function fillList( box ) {;
+								for ( i = 0; i < size; i++ ) {
+									option = new Option( output[i], output[i]);
+									box.options[box.length] = option;
+								}
+								box.selectedIndex=0; 
+							}
+						</script>
+
 						<!--
 						<div class="row">
 							<div class="12u">
@@ -135,38 +189,6 @@
 					</form>
 				</section>
 			</article>
-		
-		<article class="container box style3">
-				<section>
-					<header>
-						<h3>Filter</h3>
-					</header>
-					<form method="post" action="/SchoolCourse/FilterServlet">
-						<div class="row">
-							<div class="12u">
-								<input class="text" type="text" name="className" id="className" value="" placeholder="Type in Class Name" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="12u">
-								<select name="location" id="location">
-									<option value="">Choose a location</option>
-								</select>
-							</div>
-						</div>
-						<div class="row">
-							<div class="12u">
-								<ul class="actions">
-									<li><input type="submit" value="Submit" /></li>
-									<li><input type="reset" class="style3" value="Clear Filter" /></li>
-								</ul>
-							</div>
-						</div>
-					</form>
-				</section>
-			</article>
-
-
 
 		<section id="footer">
 		<!-- 

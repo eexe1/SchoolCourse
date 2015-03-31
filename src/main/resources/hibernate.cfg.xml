@@ -6,6 +6,7 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/SchoolCourse</property>
         <property name="connection.username">java</property>
